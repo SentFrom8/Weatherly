@@ -23,7 +23,7 @@
   <main>
       <div class="title">
         <h1>Weatherly</h1>
-        <p>Your weather companion!</p>
+        <p>Your weather companion</p>
         <SearchBar @location-click="(location) => selected = location" />
       </div>
       <WeatherCard :forecast="forecast"/>
@@ -50,6 +50,7 @@
     text-align: center;
     width: 40rem;
     max-width: 90%;
+    flex: 0 0 auto;
   }
   h1 {
     font-family: "Inria Serif", serif;
@@ -62,5 +63,6 @@
     font-size: clamp(1rem, 1.6rem, 4vw);
     transform: translateY(-60%);
     color: rgba(0,0,0,0.78);
+    font-weight: 600;
   }
 </style>

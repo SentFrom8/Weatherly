@@ -47,22 +47,36 @@
           <li>feels like: {{ selected ? Math.round(selected.main.feels_like) : null }}°C</li>
           <li>{{ selected ? formatTime(selected.dt) : null }}</li>
         </ul>
-        <img v-if="forecast" :src="'https://openweathermap.org/img/wn/' + forecast.list[0].weather[0].icon + '@2x.png'" alt="test">
+        <img v-if="forecast" :src="'https://openweathermap.org/img/wn/' + selected?.weather[0].icon + '@2x.png'" alt="test">
       </div>
     </div>
     <div class="forecast-data-lower">
-      <WeatherSummaryCard v-for="(weather, index) in forecast?.list" :key="index" :weather="weather"/>
+      <WeatherSummaryCard v-for="(weather, index) in forecast?.list" :key="index" :weather="weather" @click="selected=weather"/>
     </div>
   </div>
 </template>
 
 <style scoped>
+    h2 {
+      font-weight: 700;
+      font-size: 1.6rem;
+    }
+
+    ul {
+      padding: 0px;
+    }
+  
+    li {
+      list-style: none;
+      font-weight: 500;
+    }
+
   .invisible {
     visibility: hidden;
   }
 
   .forecast-data-container {
-    background-color: rgba(5, 50, 150, 0.8);
+    background-color: rgb(146, 146, 146, 0.85);
     width: 50rem;
     max-width: 90%;
     border-radius: 40px;
@@ -70,14 +84,16 @@
     flex-direction: column;
     overflow: hidden;
     padding-block: 20px;
-    gap: 10px;
+    gap: 20px;
+    color: rgba(0,0,0,0.78);
   }
 
   .forecast-data-upper {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     padding-inline: 30px;
+    border-bottom: 1px solid rgba(64, 64, 64, 0.5);
   }
 
   .forecast-upper-left {
@@ -86,14 +102,6 @@
     gap: 20px;
   }
 
-  ul {
-    padding: 0px;
-  }
-
-  li {
-    list-style: none;
-    font-family: "Inter", sans-serif;
-  }
 
   .forecast-upper-right {
     display: flex;
@@ -104,5 +112,7 @@
     padding-inline: 30px;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
+
 </style>

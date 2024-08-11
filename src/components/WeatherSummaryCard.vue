@@ -23,13 +23,17 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
-        background-color: #d9d9d9cc;
+        background-color: rgba(255, 255, 255, 0.65);
         border-radius: 20px;
-        font-family: "Inter", sans-serif;
     }
 
     .card-container p {
         transform: translateY(20%);
+    }
+
+    .card-container:hover {
+        cursor: pointer;
+        outline: 2px solid rgba(0,0,0,0.78);
     }
     
     .temps {
@@ -39,5 +43,9 @@
 
     .temps p {
         transform: translateY(-20%);
+    }
+
+    .max-temp {
+        font-weight: 700;
     }
 </style>
