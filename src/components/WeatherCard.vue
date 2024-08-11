@@ -1,0 +1,108 @@
+<script setup lang="ts">
+  import { ref, watch } from "vue";
+  import type { ForecastData, WeatherData } from "../types/types";
+  import { formatTime } from "@/api/weather_data";
+  import WeatherSummaryCard from "./WeatherSummaryCard.vue";
+  
+  const props = defineProps<{
+      forecast: ForecastData | null,
+  }>()
+
+  const selected = ref<WeatherData | null>(null)
+
+
+
+  const currentRainPct = () => {
+    if (selected.value) {
+      console.log(selected.value.weather[0].id.toString())
+      if (selected.value.weather[0].id.toString().match(/^[235]/)) {
+        return 100
+      }
+    return 0
+    }
+  }
+
+  watch(() => props.forecast, (current, prev) => {
+    if (current) {
+      console.log(current)
+      selected.value=current.list[0]
+    }
+  })
+</script>
+
+<template>
+  <div class="forecast-data-container" :class="{invisible: !forecast}">
+    <div class="forecast-data-upper">
+      <div class="forecast-upper-left">
+        <h2>{{ selected ? Math.round(selected.main.temp) : null }}°C</h2>
+        <ul>
+          <li>rain: {{ (selected && selected.pop) ? selected.pop*100 : currentRainPct()}}%</li>
+          <li>humidity: {{ selected?.main.humidity }}%</li>
+          <li>wind: {{ selected?.wind.speed }}m/s</li>
+        </ul>
+      </div>
+      <div class="forecast-upper-right">
+        <ul>
+          <li><h2>{{ selected?.weather[0].main }}</h2></li>
+          <li>feels like: {{ selected ? Math.round(selected.main.feels_like) : null }}°C</li>
+          <li>{{ selected ? formatTime(selected.dt) : null }}</li>
+        </ul>
+        <img v-if="forecast" :src="'https://openweathermap.org/img/wn/' + forecast.list[0].weather[0].icon + '@2x.png'" alt="test">
+      </div>
+    </div>
+    <div class="forecast-data-lower">
+      <WeatherSummaryCard v-for="(weather, index) in forecast?.list" :key="index" :weather="weather"/>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+  .invisible {
+    visibility: hidden;
+  }
+
+  .forecast-data-container {
+    background-color: rgba(5, 50, 150, 0.8);
+    width: 50rem;
+    max-width: 90%;
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding-block: 20px;
+    gap: 10px;
+  }
+
+  .forecast-data-upper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 30px;
+  }
+
+  .forecast-upper-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  ul {
+    padding: 0px;
+  }
+
+  li {
+    list-style: none;
+    font-family: "Inter", sans-serif;
+  }
+
+  .forecast-upper-right {
+    display: flex;
+  }
+
+  .forecast-data-lower {
+    display: flex;
+    padding-inline: 30px;
+    align-items: center;
+    justify-content: space-between;
+  }
+</style>
