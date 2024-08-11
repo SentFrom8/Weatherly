@@ -1,5 +1,5 @@
 import axios from "axios"
-import type { CurrentWeatherData, ForecastData, Geolocation, WeatherData } from '@/types/types';
+import type { ForecastData, Geolocation, WeatherData } from '@/types/types';
  
 const API_URL = "https://api.openweathermap.org"
 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY
@@ -43,7 +43,7 @@ export const fetchForecast = async (lat: number, lon: number, cnt: number): Prom
 }
 
 export const debounce = (func: (...args: any[]) => void, timer: number) => {
-    let timeout: NodeJS.Timeout
+    let timeout: ReturnType<typeof setTimeout>
 
     return (...args: any[]) => {
         clearTimeout(timeout)
