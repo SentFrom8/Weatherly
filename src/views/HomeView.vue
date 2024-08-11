@@ -40,7 +40,7 @@
     flex-direction: column;
     background: 
         linear-gradient(135deg, rgba(255, 244, 144, 0.15) 0%, rgba(138, 255, 248, 0.15) 100%), 
-        url("@/assets/clouds.jpg");
+        url("/clouds.jpg");
     background-size: cover;
     background-position: 50% 45%;
     gap: 20px;
