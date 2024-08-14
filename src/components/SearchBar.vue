@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { ref, watch } from "vue"
-    import { fetchLocations, debounce } from "../api/weather_data"
+    import { fetchLocations, debounce } from "../api/functions"
     import type { Geolocation } from "../types/types"
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
     import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"

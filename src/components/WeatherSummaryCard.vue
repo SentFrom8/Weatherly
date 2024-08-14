@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import type { WeatherData } from "@/types/types"
-    import { formatTime } from "@/api/weather_data";
+    import { formatTime } from "@/api/functions";
     const props = defineProps<{
         weather: WeatherData;
     }>()

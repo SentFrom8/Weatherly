@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref, watch } from "vue";
   import type { ForecastData, WeatherData } from "../types/types";
-  import { formatTime } from "@/api/weather_data";
+  import { formatTime } from "@/api/functions";
   import WeatherSummaryCard from "./WeatherSummaryCard.vue";
   
   const props = defineProps<{
@@ -57,19 +57,23 @@
 </template>
 
 <style scoped>
-    h2 {
-      font-weight: 700;
-      font-size: 1.6rem;
-    }
+  h2 {
+    font-weight: 700;
+    font-size: 1.4rem;
+  }
 
-    ul {
-      padding: 0px;
-    }
-  
-    li {
-      list-style: none;
-      font-weight: 500;
-    }
+  ul {
+    padding: 0px;
+  }
+
+  li {
+    list-style: none;
+    font-weight: 500;
+  }
+
+  img {
+    display: none;
+  }
 
   .invisible {
     visibility: hidden;
@@ -83,7 +87,6 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    padding-block: 20px;
     gap: 20px;
     color: rgba(0,0,0,0.78);
   }
@@ -92,14 +95,13 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    padding-inline: 30px;
+    padding: 20px 30px 20px 30px;
     border-bottom: 1px solid rgba(64, 64, 64, 0.5);
   }
 
   .forecast-upper-left {
     display: flex;
-    align-items: center;
-    gap: 20px;
+    flex-direction: column;
   }
 
 
@@ -109,10 +111,25 @@
 
   .forecast-data-lower {
     display: flex;
-    padding-inline: 30px;
+    padding: 0px 30px 20px 30px;
     align-items: center;
-    justify-content: space-between;
+    justify-content:space-between;
     flex-wrap: wrap;
+    column-gap: 5px;
+    row-gap: 15px;
   }
+
+  @media only screen and (min-width: 768px) {
+  img {
+    display: block;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  .forecast-upper-left {
+    flex-direction: row;
+    align-items: center;
+  }
+}
 
 </style>

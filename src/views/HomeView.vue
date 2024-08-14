@@ -3,7 +3,7 @@
   import SearchBar from '@/components/SearchBar.vue'
   import WeatherCard from '@/components/WeatherCard.vue';
   import type { ForecastData, Geolocation } from '@/types/types';
-  import { fetchForecast, fetchWeather } from '@/api/weather_data';
+  import { fetchForecast, fetchWeather } from '@/api/functions';
 
   const selected = ref<Geolocation | null>(null)
   const forecast = ref<ForecastData | null>(null)
@@ -33,7 +33,7 @@
 <style scoped>
   main {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,7 +44,7 @@
     background-size: cover;
     background-position: 50% 45%;
     gap: 20px;
-    padding-top: 10%;
+    padding-bottom: 3vh;
   }
   .title {
     text-align: center;
