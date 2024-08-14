@@ -24,7 +24,6 @@
 
   watch(() => props.forecast, (current, prev) => {
     if (current) {
-      console.log(current)
       selected.value=current.list[0]
     }
   })
@@ -36,16 +35,16 @@
       <div class="forecast-upper-left">
         <h2>{{ selected ? Math.round(selected.main.temp) : null }}°C</h2>
         <ul>
-          <li>rain: {{ (selected && selected.pop) ? selected.pop*100 : currentRainPct()}}%</li>
-          <li>humidity: {{ selected?.main.humidity }}%</li>
-          <li>wind: {{ selected?.wind.speed }}m/s</li>
+          <li>Rain: {{ (selected && selected.pop) ? selected.pop*100 : currentRainPct()}}%</li>
+          <li>Humidity: {{ selected?.main.humidity }}%</li>
+          <li>Wind: {{ selected?.wind.speed }}m/s</li>
         </ul>
       </div>
       <div class="forecast-upper-right">
         <ul>
           <li><h2>{{ selected?.weather[0].main }}</h2></li>
-          <li>feels like: {{ selected ? Math.round(selected.main.feels_like) : null }}°C</li>
-          <li>{{ selected ? formatTime(selected.dt) : null }}</li>
+          <li>Feels like: {{ selected ? Math.round(selected.main.feels_like) : null }}°C</li>
+          <li>Time: {{ selected ? formatTime(selected.dt) : null }}</li>
         </ul>
         <img v-if="forecast" :src="'https://openweathermap.org/img/wn/' + selected?.weather[0].icon + '@2x.png'" alt="test">
       </div>
@@ -102,12 +101,14 @@
   .forecast-upper-left {
     display: flex;
     flex-direction: column;
+    column-gap: 10px;
   }
 
 
   .forecast-upper-right {
     display: flex;
   }
+
 
   .forecast-data-lower {
     display: flex;
